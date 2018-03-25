@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'pl.zax37'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+    compile(project(':Tools')) {
+        exclude group: 'log4j'
+    }
+
+    compile(project(':Payments')) {
+        exclude group: 'org.apache.logging.log4j'
+    }
+
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-to-slf4j', version: '2.10.0'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "pl.zax37.javatask5.Main"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
