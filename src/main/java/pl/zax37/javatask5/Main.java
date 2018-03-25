@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public class Main {
     private final static Logger logger = LoggerFactory.getLogger(Main.class);
@@ -14,7 +15,7 @@ public class Main {
     private final static PaymentsService paymentsService = new PaymentsService();
 
     public static void main(String[] args) throws ParseException {
-        logger.trace("Application started: Main.main("+args+")");
+        logger.trace("Application started: Main.main("+ Arrays.toString(args)+")");
         Options options = new Options();
         options.addRequiredOption("price", null, true, "ticket price");
         options.addRequiredOption("age", null, true, "client age");
